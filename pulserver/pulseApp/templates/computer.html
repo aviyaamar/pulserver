@@ -1,0 +1,704 @@
+{% extends 'base.html' %}
+{% block head %}
+    <meta charset="UTF-8">
+    <title>logged in</title>
+    <style>
+        .computerSoftware {
+            background-color: #e4e4e4;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            text-align: left;
+            padding: 10px;
+
+            font-size: 12px;
+        }
+
+        .computerSoftware table {
+            /*width: 100%;*/
+        }
+
+        .computerSoftware > .header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            font-size: 30px;
+        }
+
+        .computerSoftware > .header > .title {
+            flex-grow: 1;
+        }
+
+        .table-bordered {
+            border: 1px solid #dddddd;
+            border-collapse: separate;
+            border-left: 0;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+        }
+
+        .table {
+            width: 70%;
+            position: relative;
+            left: 280px;
+            margin-bottom: 20px;
+            background-color: transparent;
+            border-collapse: collapse;
+            border-spacing: 0;
+            display: table;
+            font-size: 20px;
+
+        }
+
+        .widget.widget-table .table {
+            margin-bottom: 0;
+            border: none;
+        }
+
+        .widget.widget-table .widget-content {
+            padding: 0;
+        }
+
+        .widget .widget-header + .widget-content {
+            border-top: none;
+            -webkit-border-top-left-radius: 0;
+            -webkit-border-top-right-radius: 0;
+            -moz-border-radius-topleft: 0;
+            -moz-border-radius-topright: 0;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .widget .widget-content {
+            padding: 20px 15px 15px;
+            background: #FFF;
+            border: 1px solid #D5D5D5;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        .widget .widget-header {
+            position: relative;
+            height: 40px;
+            line-height: 40px;
+            background: #E9E9E9;
+            background: -moz-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(100%, #e9e9e9));
+            background: -webkit-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+            background: -o-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+            background: -ms-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+            background: linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+            text-shadow: 0 1px 0 #fff;
+            border-radius: 5px 5px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1),inset 0 1px 0 white,inset 0 -1px 0 rgba(255,255,255,0.7);
+            border-bottom: 1px solid #bababa;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9');
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
+            border: 1px solid #D5D5D5;
+            -webkit-border-top-left-radius: 4px;
+            -webkit-border-top-right-radius: 4px;
+            -moz-border-radius-topleft: 4px;
+            -moz-border-radius-topright: 4px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            -webkit-background-clip: padding-box;
+        }
+
+        thead {
+            display: table-header-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+
+        .widget .widget-header h3 {
+            top: 2px;
+            position: relative;
+            left: 10px;
+            display: inline-block;
+            margin-right: 3em;
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            line-height: 18px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .widget .widget-header [class^="icon-"], .widget .widget-header [class*=" icon-"] {
+            display: inline-block;
+            margin-left: 13px;
+            margin-right: -2px;
+            font-size: 16px;
+            color: #555;
+            vertical-align: middle;
+        }
+
+        .nav{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+        }
+
+        .nav > li{
+            display: block;
+            color: #666;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .nav > li > a{
+            text-decoration: none;
+            color: white;
+            font-size: 30px;
+            float: left;
+            font-size: 10pt;
+
+        }
+        .nav > li > a:hover{
+            background-color: #ddd;
+        }
+        .nav > li > a.title {
+            font-size: 20pt;
+        }
+
+        .nav > li > a.active {
+            color: white;
+            background-color: #4CAF50;
+        }
+
+
+
+        .notice:first-child{
+            margin-top:10px;
+        }
+        .notice {
+            padding: 15px;
+            background-color: #fafafa;
+            border-left: 6px solid #7f7f84;
+            margin-bottom: 10px;
+            -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+            box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+        }
+        .notice-sm {
+            width: 150px;
+            padding: 15px;
+            font-size: 150%;
+        }
+        .notice-lg {
+            padding: 15px;
+            font-size: 170%;
+        }
+        .notice-success {
+            font-size: 150%;
+            border-color: #80D651;
+        }
+        .notice-success>strong {
+            font-size: 150%;
+            color: #80D651;
+        }
+        .notice-info {
+            font-size: 150%;
+            border-color: #45ABCD;
+        }
+        .notice-info>strong {
+            font-size: 150%;
+            color: #45ABCD;
+        }
+        .notice-warning {
+            font-size: 150%;
+            border-color: #FEAF20;
+        }
+        .notice-warning>strong {
+            font-size: 150%;
+            color: #FEAF20;
+        }
+        .notice-danger {
+            font-size: 150%;
+            border-color: #d73814;
+        }
+        .notice-danger>strong {
+            font-size: 150%;
+            color: #d73814;
+        }
+        .notice>.desc{
+            font-size: 150%;
+            display:none;
+        }
+        .readMore{
+            font-size: 150%;
+            cursor:pointer;
+        }
+
+
+
+
+        .thumbnail {
+            position:relative;
+            overflow:hidden;
+        }
+
+        .caption {
+            position:absolute;
+            top:0;
+            right:0;
+            background:rgba(90, 90, 90, 0.75);
+            width:100%;
+            height:100%;
+            padding:2%;
+            display: none;
+            text-align: center;
+            color:#fff !important;
+            z-index:2;
+        }
+
+        .container{
+            position: relative;
+            right: 70px;
+            text-align: center;
+            padding-left: 170px;
+            bottom: -15px;
+
+        }
+
+        .row{
+            width: 100%;
+            margin-left:110px;
+        }
+
+        .nav{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+            text-align: left;
+        }
+
+
+        .nav > li{
+            display: block;
+            color: #666;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .nav > li > a{
+            text-decoration: none;
+            color: black;
+            font-size: 25px;
+            float: left;
+
+
+        }
+        .nav > li > a:hover{
+            background-color: #ddd;
+        }
+        .nav > li > a.title {
+            font-size: 20pt;
+        }
+
+        .nav > li > a.active {
+            color: black;
+            background-color: #4CAF50;
+        }
+
+
+        .computerSoftware{
+            width: 70%;
+            position: relative;
+            left: 280px;
+        }
+        .span7{
+            width: 70%;
+            position: relative;
+            left: 280px;
+        }
+
+
+    </style>
+{% endblock %}
+{% block body %}
+
+
+
+    <ul class="nav">
+        <li class="nav-logo">
+            <img class = "small-logo" style=" position: relative; left: 1720px; width: 80px; height: 70px; margin-top: 2px;" src="/static/pulseApp/logo.png" alt="logo"/>
+        </li>
+
+        <li><a style="padding-top: 0px;" href="/dashboard">Home</a></li>
+
+        <li><h2> <form style="margin-bottom: auto;" type='GET' action = "search_log"  accept-charset="utf-8">
+            <input type="text" id = 'q' name='q' placeholder="search log"/>
+            <input type= 'submit' value='search'>
+        </form></h2></li>
+    </ul>
+
+    <script>
+        $(document).ready(function() {
+            $("[rel='tooltip']").tooltip();
+
+            $('.thumbnail').hover(
+                function(){
+                    $(this).find('.caption').slideDown(250); //.fadeIn(250)
+                },
+                function(){
+                    $(this).find('.caption').slideUp(250); //.fadeOut(205)
+                }
+            );
+        });
+    </script>
+
+    <div class="container">
+        <div class="row">
+
+
+            <!-- TH1 -->
+            <div class="col-sm-2">
+                <div class="thumbnail">
+                    <a href="#" >
+                        <div class="caption">
+                            <h1><b> Name {{ computer.computer_name }}</b></h1>
+
+                        </div>
+                        <img src="http://cdn.onlinewebfonts.com/svg/img_294950.png" alt="..." class="">
+                    </a>
+                </div>
+            </div>
+
+            <!-- TH2 -->
+            <div class="col-sm-2">
+                <div class="thumbnail">
+                    <a href="#" class="">
+                        <div class="caption">
+                            <h1><b> Version {{ computer.version }}</b></h1>
+
+                        </div>
+                        <img src="https://jakevdp.github.io/images/vim_icon.png" alt="..." class="">
+                    </a>
+                </div>
+            </div>
+
+            <!-- TH2 -->
+            <div class="col-sm-2">
+                <div class="thumbnail">
+                    <a href="#" class="">
+                        <div class="caption">
+                            <h1><b> OS {{ computer.operating_system }}</b></h1>
+
+                        </div>
+                        <img src="https://cdn2.iconfinder.com/data/icons/ios-7-style-metro-ui-icons/512/MetroUI_Ubuntu_Alt.png" alt="..." class="">
+                    </a>
+                </div>
+            </div>
+
+            <!-- TH4 -->
+            <div class="col-sm-2">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h1><b> CPU {{ computer.cpu }}</b></h1>
+
+                    </div>
+                    <img src="https://cdn.iconscout.com/public/images/icon/premium/png-512/cpu-chip-microprocessor-processor-electronic-hardware-circuit-board-microchip-device-33996847a8eb608c-512x512.png" alt="..." class="">
+                </div>
+            </div>
+        </div><!--/row -->
+    </div> <!-- end container -->
+    <br>
+    </br>
+    <div class="computerSoftware">
+        <div class="header">
+            <p class="title">Software List <small>({{ softwares | length }} ready for upgrade)</small></p>
+
+            {% if computer.upgrade_in_progress %}
+                <span class="badge badge-warning">Upgrade In Progress</span>
+                <script>
+                    setInterval(function() {
+                        $.ajax({
+                            url: "{{ computer.id }}/updates-in-progress",
+                            success: function(data) {
+                                if (!data.in_progress) {
+                                    location.reload();
+                                }
+                            }
+                        })
+                    }, 5000);
+                </script>
+            {% else %}
+                <form method="post" action="{{ computer.id }}/check-updates">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Check Updates</button>
+                </form>
+            {% endif %}
+        </div>
+        <div class="data">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Current Version</th>
+                    <th>Upgrade Version</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%for software in softwares %}
+                    <tr>
+                        <td>{{ software.name }}</td>
+                        <td>{{ software.current_version }}</td>
+                        <td>{{ software.upgrade_version }}</td>
+                        <td>
+                            {% if software.upgrade_version and not computer.upgrade_in_progress %}
+                                <form method="post" action="{{ computer.id }}/install-update/{{ software.id }}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-secondary">Upgrade</button>
+                                </form>
+                            {% endif  %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <br>
+    </br>
+    <div class="span7">
+        <div class="widget stacked widget-table action-table">
+
+            <div class="widget-header">
+                <i class="icon-th-list"></i>
+                <h3 style="font-weight: 900; font-size:20px;">LOG</h3>
+            </div> <!-- /widget-header -->
+        </div>
+    </div>
+    <div class="widget-content"></div>
+
+
+    <table class="table table-striped table-bordered" >
+        <thead>
+        <tr>
+            <th style="font-size:20px;"><b>File path</b></th>
+            <th style="font-size:20px"><b>Log</b></th>
+            <th style="font-size:20px"><b>Time Created</b></th>
+            <!--<th class="td-actions"></th>-->
+        </tr>
+        </thead>
+        <tbody>
+
+        {%for log in gaga %}
+            <tr>
+                <td style="font-size:18px"> {{log.path}} </td>
+                <td style="font-size:18px"> {{log.text_content}} </td>
+                <td style="font-size:18px"> {{log.time_created}} </td>
+
+
+            </tr>
+        {% endfor%}
+
+        </tbody>
+    </table>
+    <!--  <table cellpadding= "20">
+    <tr>
+      <th>File Path</th>
+      <th>Log</th>
+      <th>Time Created</th>
+    </tr>
+
+      {%for log in gaga %}
+    <tr>
+      <td> {{log.path}} </td>
+      <td> {{log.text_content}} </td>
+      <td> {{log.time_created}} </td>
+    </tr>
+      {% endfor%}
+  </table>-->
+
+
+
+
+    <div class="span7">
+        <div class="widget stacked widget-table action-table">
+
+            <div class="widget-header">
+                <i class="icon-th-list"></i>
+                <h3 style="font-weight: 900; font-size:20pt;">Disk</h3>
+            </div> <!-- /widget-header -->
+
+            <div class="widget-content"> </div>
+        </div>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th style="font-size:20px;"> <b> Name </b></th>
+            <th style="font-size:20px;"> <b> Percent Used</b> </th>
+            <th style="font-size:20px;"> <b> Total Space </b></th>
+
+            <!--<th class="td-actions"></th>-->
+
+        </tr>
+
+        </thead>
+        <tbody>
+        {% for disk_name, disk_data in disk.items %}
+            <tr>
+                <td style="font-size:18px;">{{disk_name}}</td>
+                <td style="font-size:18px;">{{disk_data.percent}} </td>
+                <td style="font-size:18px;"> {{disk_data.total}}</td>
+
+                <!--	<td class="td-actions">
+                        <a href="javascript:;" class="btn btn-small btn-primary">
+                            <i class="btn-icon-only icon-ok"></i></a>
+
+                        <a href="javascript:;" class="btn btn-small">
+                            <i class="btn-icon-only icon-remove"></i></a></td>-->
+            </tr>
+        {% endfor%}
+
+        </tbody>
+    </table>
+
+
+    <!--  <h1> <b> Disk</b></h1>
+
+  <table cellpadding= "20">
+      <tr>
+          <th> NAME</th>
+          <th> Percent used </th>
+          <th> total space</th>
+      </tr>
+
+      {% for disk_name, disk_data in disk.items %}
+      <tr>
+          <td>{{disk_name}}</td>
+          <td>{{disk_data.percent}} </td>
+          <td> {{disk_data.total}}</td>
+
+      </tr>
+      {% endfor %}
+  </table>-->
+
+    <div class="span7">
+        <div class="widget stacked widget-table action-table">
+
+            <div class="widget-header">
+                <i class="icon-th-list"></i>
+                <h3 style="font-weight: 900; font-size:20pt;">CPU</h3>
+            </div> <!-- /widget-header -->
+
+            <div class="widget-content"> </div>
+        </div>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <td style="font-size:20px;"> <b> CPU Name </b></td>
+            <td style="font-size:20px;"> <b> Utilization</b></td>
+            <!--<th class="td-actions"></th>-->
+        </tr>
+        </thead>
+        <tbody>
+        {% for cpu_name, cpu_data  in cpu.cpus.items %}
+            <tr>
+                <td style="font-size:18px;" > {{cpu_name}}</td>
+                <td style="font-size:18px;"> {{cpu_data}}</td>
+                <!--	<td class="td-actions">
+                        <a href="javascript:;" class="btn btn-small btn-primary">
+                            <i class="btn-icon-only icon-ok"></i></a>
+
+                        <a href="javascript:;" class="btn btn-small">
+                            <i class="btn-icon-only icon-remove"></i></a></td>-->
+            </tr>
+        {% endfor%}
+
+        </tbody>
+    </table>
+
+
+    <!--  <h1> <b> CPU</b></h1>
+
+  <table cellpadding= "20">
+      <tr>
+          <td> CPU NAME</td>
+          <td> Utilization</td>
+      </tr>
+
+      {% for cpu_name, cpu_data  in cpu.cpus.items %}
+      <tr>
+          <td> {{cpu_name}}</td>
+          <td> {{cpu_data}}</td>
+      </tr>
+
+      {%endfor%}
+
+  </table>-->
+    <div class="span7">
+        <div class="widget stacked widget-table action-table">
+
+            <div class="widget-header">
+                <i class="icon-th-list"></i>
+                <h3 style="font-weight: 900; font-size:20pt;">Memory</h3>
+            </div> <!-- /widget-header -->
+
+            <div class="widget-content"> </div>
+        </div>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <td style="font-size:20px;"> <b> Memory Name </b></td>
+            <td style="font-size:20px;"> <b> Memory Data </b></td>
+            <!--<th class="td-actions"></th>-->
+        </tr>
+        </thead>
+        <tbody>
+        {% for memory_name , memory_data in virtual_memory.items%}
+            <tr>
+                <th style= "font-size:18px;">{{memory_name}}</th>
+                <th style="font-size:18px;">{{memory_data}}</th>
+                <!--	<td class="td-actions">
+                        <a href="javascript:;" class="btn btn-small btn-primary">
+                            <i class="btn-icon-only icon-ok"></i></a>
+
+                        <a href="javascript:;" class="btn btn-small">
+                            <i class="btn-icon-only icon-remove"></i></a></td>-->
+            </tr>
+        {% endfor%}
+
+        </tbody>
+    </table>
+
+
+    <!--   <h1> <b> MEMORY </b></h1>
+
+   <table cellpadding= "20">
+
+
+       {% for memory_name , memory_data in virtual_memory.items%}
+       <tr>
+           <th>{{memory_name}}</th>
+           <th>{{memory_data}}</th>
+
+       </tr>
+
+
+       {%endfor%}
+   </table>-->
+
+
+
+{% endblock %}

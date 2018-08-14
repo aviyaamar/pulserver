@@ -1,0 +1,4 @@
+sudo apt install firefox=45.0.2+build1-0ubuntu1
+
+
+next(row.split("\t:", 1) for row in open("/proc/cpuinfo", "rt").readlines() if row.startswith("model name"))[1].strip()

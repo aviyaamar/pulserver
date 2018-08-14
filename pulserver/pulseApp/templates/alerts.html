@@ -1,0 +1,237 @@
+<!--{% extends 'base.html' %}-->
+
+<!-- bootstrap css js-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<!-- do not touch -->
+
+{% block head %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- stylesheet -->
+    <meta charset="UTF-8">
+
+    <title>Alerts</title>
+    <!-- css here-->
+    <style>
+
+
+
+
+        .container{
+            position: fixed ;
+            bottom: 50px;
+            right: 300px;
+            left: 250px;
+
+
+        }
+        .alerts > .alt > {
+            width: 1500px;
+
+        }
+        .alerts {
+            background-color: #e4e4e4;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 14px;
+
+        }
+
+
+        .alerts > .header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            font-size: 30px;
+        }
+
+        .alerts > .header > .title {
+            flex-grow: 1;
+        }
+
+
+        .nav{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+            text-align: left;
+        }
+
+
+        .nav > li{
+            display: block;
+            color: #666;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .nav > li > a{
+            text-decoration: none;
+            color: black;
+            font-size: 25px;
+            float: left;
+
+
+        }
+        .nav > li > a:hover{
+            background-color: #ddd;
+        }
+        .nav > li > a.title {
+            font-size: 20pt;
+        }
+
+        .nav > li > a.active {
+            color: black;
+            background-color: #4CAF50;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+
+
+    <script>
+        if(screen.width >= 1500){document.write("<style> body{zoom:115%}.hand_ipad img{top:114px}</style>");}
+        if(screen.width >= 2000){document.write("<style> body{zoom:135%}.hand_ipad img{top:114px} iframe{height:275px;}</style>");}
+        if(screen.width >= 2500){document.write("<style> body{zoom:150%}.hand_ipad img{top:114px} iframe{height:275px;}</style>");}
+
+    </script>
+
+
+
+    <ul class="nav">
+        <li class="nav-logo">
+            <img class = "small-logo" style=" position: relative; left: 1720px; width: 80px; height: 70px; margin-top: 2px;" src="/static/pulseApp/logo.png" alt="logo"/>
+        </li>
+
+        <li><a href="/dashboard">Home</a></li>
+
+        <form class="navbar-form navbar-left">
+
+        </form>
+    </ul>
+
+
+
+
+
+    <script>
+        function approve_alert(alert_id) {
+            $.ajax({
+                url: "approve/" + alert_id,
+                success: function() {
+                    location.reload();
+                },
+                error: function() {
+                    alert("NOT OK " + alert_id);
+                }
+            })
+        }
+
+    </script>
+
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-">
+                <div class="alerts">
+                    <div class="header">
+                        <p class="title" style="font-family:Georgia; font-weight: 900; font-size:25pt; text-align:center; ">New Alerts</p>
+                    </div>
+                    <div class="data">
+                        <div class="alt" style="width:500px; height:545px; overflow:auto;">
+                            <table class="table" style="font-size: 20px" cellspacing="0" cellpadding="1" border="1" width="300"  >
+                                <thead>
+                                <tr>
+                                    <th scope="col" style="width: 5%; font-family:Georgia; font-weight: 900; font-size:20pt;">acknowledge alert</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {%for alert in alerts%}
+                                    <tr>
+                                        <td>
+                                            <a href="#" id="example-{{ alert.id }}" data-toggle="popover">{{ alert.severity_level }}--{{ alert.alert_description }}</a>
+                                            <script>
+                                                $('#example-{{ alert.id }}').popover({
+                                                    placement: 'right',
+                                                    title: 'press to confirm',
+                                                    html: true,
+                                                    content: '<button type="button" onclick="approve_alert({{ alert.id }})">acknowledge</button> '
+                                                });
+
+                                            </script>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--new table-->
+
+            <div class="col">
+
+                <div class="alerts">
+                    <div class="header">
+                        <p class="title" style="font-family:Georgia; font-weight: 900; font-size:25pt; text-align:center; ">Alerts History</p>
+                    </div>
+                    <div class="data">
+                        <div style="width:540px; height:545px; overflow:auto;">
+                            <table class="table" style="font-size: 20px" cellspacing="0" cellpadding="1" border="1" width="300">
+
+                                <thead>
+                                <tr>
+                                    <th scope="col">
+
+                                        <form type='GET' action = "search"  accept-charset="utf-8">
+                                            <input type="text" id = 'q' name='q' placeholder="search"/>
+                                            <input type= 'submit' value='search alerts'></li>
+                                        </form>
+
+
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody class="test">
+                                {%for alert in alerts%}
+                                    <tr>
+
+                                        <td>
+
+                                            {{ alert.computer }}
+                                            {{ alert.severity_level }}
+                                            {{ alert.alert_description }}
+
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--col dic-->
+        </div>
+
+        <div class="w-100"></div>
+        <!-- grid -->
+    </div>
+    </div>
+
+
+
+
+{% endblock %}

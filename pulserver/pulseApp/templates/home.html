@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>pulserver</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+        .login{
+            width: 100%;
+            text-align: left;
+
+        }
+        .btn btn-dark{
+            float:right;
+
+        }
+        .logo img{
+            width: 450px;
+            height: 350px;
+        }
+        .container {
+            background-color: #e4e4e4;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 10px;
+
+        }
+
+
+
+
+
+
+
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron text-center">
+        <div class="login">
+            <a href="http://127.0.0.1:8000/login/"> <button class ="btn btn-dark" type="button">Login</button> </a>
+        </div>
+        <div class ="logo">
+            <img src="/static/pulseApp/logo.png" alt="logo"/>
+
+        </div>
+    </div>
+
+    <script>
+        if(screen.width >= 1500){document.write("<style> body{zoom:115%}.hand_ipad img{top:114px}</style>");}
+        if(screen.width >= 2000){document.write("<style> body{zoom:135%}.hand_ipad img{top:114px} iframe{height:275px;}</style>");}
+        if(screen.width >= 2500){document.write("<style> body{zoom:150%}.hand_ipad img{top:114px} iframe{height:275px;}</style>");}
+
+    </script>
+
+    <br>
+    </br>
+    <div class="container" >
+        <div class="row">
+            <div class="col-sm-4">
+                <b><h3 style="font-family: Blippo; font-weight: 900; font-size:20pt;">Server Monitoring</h3></b>
+                <b> <p>monitoring the server perfomence by gathering data </p> </b>
+                <b> <p>using program the client installed.</p></b>
+                <b><p>the program monitoring CPU,Memory available,RAM Memory and connectivity</p></b>
+                <b><p>by reading and processing the data we can alert the client. </p></b>
+
+            </div>
+            <div class="col-sm-4">
+                <b> <h3 style="font-family: Blippo; font-weight: 900; font-size:20pt;">Server Management</h3></b>
+                <b><p>update service, the program checks wich programs installed </p></b>
+                <b><p>on the operating system, then searches for updates.</p></b>
+                <b><p>the client can see the updates in the website</p></b>
+                <b><p>and choose whether to update.</p></b>
+            </div>
+            <div class="col-sm-4">
+                <b>  <h3 style="font-family: Blippo; font-weight: 900; font-size:20pt;">Monitor Log Data</h3></b>
+                <b><p>by gathering log data from the server</p></b>
+                <b><p>we'll be able to process the data and look for exceptions</p></b>
+                <b><p>some of the exceptions cannot be seen or felt.</p></b>
+                <b><p>by reading and processing the data we can alert the client. </p></b>
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+
+    <!--  <div class="jumbotron">
+          <a href="http://127.0.0.1:8000/login/"> <button class ="btn btn-dark" type="button">Login</button> </a>
+      </div>-->
+
+
+{% endblock %}

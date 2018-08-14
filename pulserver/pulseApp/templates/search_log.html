@@ -1,0 +1,135 @@
+<!--{% extends 'base.html' %}-->
+
+<!-- bootstrap css js-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<!-- do not touch -->
+{% block head %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- stylesheet -->
+    <title>Search Reusults</title>
+
+
+    <style>
+        .alert-des >.alt >.table{
+            background-color: #e4e4e4;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .alert-des{
+            position: fixed ;
+            bottom: 200px;
+            left: 200px;
+            width:1200px;
+            height: 450px;
+        }
+
+
+        .nav{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+            text-align: left;
+        }
+
+
+        .nav > li{
+            display: block;
+            color: #666;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .nav > li > a{
+            text-decoration: none;
+            color: black;
+            font-size: 25px;
+            float: left;
+
+
+        }
+        .nav > li > a:hover{
+            background-color: #ddd;
+        }
+        .nav > li > a.title {
+            font-size: 20pt;
+        }
+
+        .nav > li > a.active {
+            color: black;
+            background-color: #4CAF50;
+        }
+        .nav-logo{
+            float: right;
+            width: 50px;
+            height: 50px;
+
+            margin-top: 15px;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+
+    <script>
+        if(screen.width >= 1500){document.write("<style> body{zoom:115%}.hand_ipad img{top:114px}</style>");}
+        if(screen.width >= 2000){document.write("<style> body{zoom:135%}.hand_ipad img{top:114px} iframe{height:275px;}</style>");}
+        if(screen.width >= 2500){document.write("<style> body{zoom:150%}.hand_ipad img{top:114px} iframe{height:275px;}</style>");}
+
+    </script>
+
+
+
+
+
+<ul class="nav">
+    <li class="nav-logo">
+        <img class = "small-logo" style=" position: relative; left: 1500px; width: 80px; height: 70px; margin-top: -15px;" src="/static/pulseApp/logo.png" />
+    </li>
+    <li class="active" ><a href="/dashboard">Home</a></li>
+    <li class="active" ><a href="/dashboard/computer/16">Back</a></li>
+
+</ul>
+
+
+
+
+
+
+    <div class="alert-des">
+        <div class="alt" style="width:1200px; height:545px; overflow:auto;">
+            <table class="table" style="font-size: 18px">
+                <thead>
+                <tr>
+                    <th scope="col" style=" text-align: center; font-family: Blippo; font-weight: 900; font-size:35pt; ">Search Results For {{query}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for log in logs %}
+                    <tr>
+                        <td>
+
+                            {{ log.path }} --> {{log.computer}}-->{{ log.text_content }}
+
+
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,302 @@
+<!--{% extends 'base.html' %}-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<!-- do not touch -->
+
+{% block head %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- stylesheet -->
+
+    <title>logged in</title>
+
+    <style>
+        .services_panel .panel{min-height: 377px;border: 1px solid #eea236;border-top:3px solid #eea236 !important;background: #fbfbfb;margin-top:2%;}
+        .services_panel .panel img{width:115px;}
+        .services_panel .panel .btn{width: 235px;margin-top: 25px;background: #f2f2f2;color: #333;border-bottom: 3px solid #e6e6e6;}
+        .services_panel .panel .btn:hover{border-bottom: 2px solid #e6e6e6;}
+
+
+        .notice:first-child{
+            margin-top:10px;
+
+
+        }
+        .notice {
+
+            padding: 15px;
+            background-color: #fafafa;
+            border-left: 6px solid #7f7f84;
+            margin-bottom: 10px;
+            -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+            box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+
+
+        }
+        .notice-sm {
+            padding: 10px;
+            font-size: 80%;
+
+
+        }
+        .notice-lg {
+            padding: 35px;
+            font-size: large;
+        }
+        .notice-success {
+            border-color: #80D651;
+            font-size: 15pt;
+        }
+        .notice-success>strong {
+            color: #80D651;
+        }
+        .notice-info {
+            border-color: #45ABCD;
+        }
+        .notice-info>strong {
+            color: #45ABCD;
+        }
+        .notice-warning {
+            border-color: #FEAF20;
+        }
+        .notice-warning>strong {
+            color: #FEAF20;
+        }
+        .notice-danger {
+            border-color: #d73814;
+        }
+        .notice-danger>strong {
+            color: #d73814;
+        }
+        .notice>.desc{
+            display:none;
+        }
+        .readMore{
+            cursor:pointer;
+        }
+
+
+
+
+        .image {
+            float: right;
+            width: 50px;
+            height: 50px;
+
+            margin-top: 15px;
+        }
+        .navbar{
+            background-color:   pink;
+            background-image: linear-gradient(to bottom, white, pink);
+            background-image: -webkit-linear-gradient(top, white, pink);
+            background-repeat: repeat-x;
+            border:           1px solid pink;
+            border-radius:    4px 4px 4px 4px;
+            box-shadow:       0 1px 4px rgba(0, 0, 0, 0.067);
+            min-height:       40px;
+            padding-left:     20px;
+            padding-right:    20px;
+
+        }
+
+        .row{
+            width: 100%;
+            margin-left:110px;
+        }
+
+        .nav{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+            text-align: left;
+        }
+
+
+        .nav > li{
+            display: block;
+            color: #666;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .nav > li > a{
+            text-decoration: none;
+            color: black;
+            font-size: 25px;
+            float: left;
+
+
+        }
+        .nav > li > a:hover{
+            background-color: #ddd;
+        }
+        .nav > li > a.title {
+            font-size: 20pt;
+        }
+
+        .nav > li > a.active {
+            color: black;
+            background-color: #4CAF50;
+        }
+        .header{
+            background-color: #f3f3f3;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 10px;
+            width: 12%;
+
+        }
+
+    </style>
+
+
+{%endblock%}
+{% block body %}
+
+
+
+
+
+    <ul class="nav">
+        <li class="nav-logo">
+            <img class = "small-logo" style=" position: relative; left: 1720px; width: 80px; height: 70px; margin-top: 2px;" src="/static/pulseApp/logo.png" alt="logo"/>
+        </li>
+
+        <li><a href="/dashboard/alerts">Alerts</a></li>
+
+        <form class="navbar-form navbar-left">
+
+        </form>
+    </ul>
+
+
+
+
+
+
+
+
+    <!--<h1><b> WELCOME TO PULSERVER {{ user }}</b></h1>-->
+    <script>
+        $(document).ready(function(){
+
+
+            $(".readMore").click(function(){
+                var This=$(this);
+                $(this).next().toggle(function(){
+                    if(This.text()=="Read"){
+                        This.text("Hide")
+                    }
+                    else{
+                        This.text("Read")
+                    }
+                })
+            });})
+    </script>
+    <br>
+    </br>
+
+    <h1 class="header" style="position: relative; left: 130px; font-family: Blippo; font-weight: 900; font-size:30pt; ">Last Alerts</h1>
+    <div class="row">
+        {%for alert in alerts%}
+            <div class="col-5">
+                <div class="notice notice-success">
+                    <strong>{{alert.severity_level}}</strong><span class="pull-right text-success readMore">Read</span>
+                    <div class="desc">
+                        <p>
+                            {{alert.alert_description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+    </div>
+
+
+
+    <!--
+            <div class="col-8 ">
+                <marquee direction="up" onmouseover="this.stop();" onmouseout="this.start();" class="m14">
+                    {%for alert in alerts%}
+                    <div class="col-lg-20"><br>{{alert.severity_level}}</br>{{alert.alert_description}}</br> </div>
+                    <!-- <div class="col-lg-7">{{alert.alert_description}}</div>-->
+        <!--{%endfor%}
+
+    </marquee>
+    </div>-->
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+
+    <div class="container services_panel">
+        {% for computer in computers %}
+            <div class="col">
+                <div class="col-md-4 ">
+                    <div class="panel text-center">
+                        <h3 style= " padding-top: 30px;  font-family: Blippo; font-weight: 900; font-size:17pt; "><b> {{ computer }} </b></h3>
+
+                        <img style="margin-top: 70px" src="https://image.flaticon.com/icons/png/512/819/819309.png" class="center-block img-responsive">
+                        <br>
+                        <br>
+                        <div class="panel-footer"><a href="computer/{{computer.id}}">{{ computer.auth_key }}></a></div>
+                        <!-- <button class="btn center-block" action="computer/{{computer.id}}">{{ computer.auth_key }}</button> -->
+
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+    </div>
+
+
+    <!-- <table cellpadding="20" >
+
+       {%for alert in alerts%}
+       <tr>
+           <th> {{alert.severity_level}}</th>
+           <th> {{alert.alert_description}}</th>
+
+       </tr>
+       {%endfor%}
+    </table>-->
+    <!--<script>
+      $(function(){
+    $('.panel').hover(function(){
+            $(this).find('.panel-footer').slideDown(250);
+        },function(){
+            $(this).find('.panel-footer').slideUp(250); //.fadeOut(205)
+        });
+    })
+    </script>
+
+      {% for computer in computers %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2>COMPUTER {{name}}</h2>
+                    </div>
+                  <div class="panel-footer"><a href="computer/{{computer.id}}">{{ computer.auth_key }}></a></div>
+                </div>
+            </div>
+           {% endfor %}
+        </div>
+    </div>
+     <!-- <h2>computers</h2>
+      {% for computer in computers %}
+      <b>Computer - <a href="computer/{{computer.id}}">{{ computer.auth_key }}</a></b><br />
+        {% endfor %}-->
+
+
+    <!--    <b><a href= "alerts/">alert</a></b><br />
+
+        <b><a href= "examp/">blala</a></b><br />-->
+{%endblock%}
